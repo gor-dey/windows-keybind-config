@@ -13,8 +13,8 @@ GroupAdd("Browsers", "ahk_exe firefox.exe")
 ; Логика: Ближняя (X1) = Право/Вниз, Дальняя (X2) = Лево/Вверх
 
 ; 1. ГЛОБАЛЬНО: Обычное нажатие — рабочие столы
-*XButton1::Send("^#{Right}")
-*XButton2::Send("^#{Left}")
+*XButton1::Send("^#{Left}")
+*XButton2::Send("^#{Right}")
 
 ; 2. ГЛОБАЛЬНО: Win + Alt + Кнопка -> Блокировка (#! = Win + Alt)
 #!XButton1::DllCall("LockWorkStation")
