@@ -43,20 +43,37 @@
 EN := 0x4090409  ; Английский (US)
 RU := 0x4190419  ; Русский
 
-; --- Левый Shift -> Английский ---
+; --- Левый Shift -> Русский ---
+LShiftStart := 0
+
+~LShift:: {
+    global LShiftStart
+    LShiftStart := A_TickCount
+}
+
 ~LShift Up:: {
     ; Проверка A_PriorKey критически важна!
     ; Если вы нажали Shift + A (чтобы напечатать "А"), то A_PriorKey будет "a".
-    ; Смена языка произойдет, ТОЛЬКО если вы нажали и отпустили Shift ОДИНОЧНО.
-    if (A_PriorKey = "LShift") {
+    ; Смена языка произойдет, ТОЛЬКО если вы нажали и отпустили Shift ОДИНОЧНО
+    ; и удержание было коротким (< 300 мс).
+    global LShiftStart
+    if (A_PriorKey = "LShift" && (A_TickCount - LShiftStart) < 300) {
         SetLayout(RU)
     }
 }
 
-; --- Правый Shift -> Русский ---
+; --- Правый Shift -> Английский ---
+RShiftStart := 0
+
+~RShift:: {
+    global RShiftStart
+    RShiftStart := A_TickCount
+}
+
 ~RShift Up:: {
-    ; То же самое для правого шифта
-    if (A_PriorKey = "RShift") {
+    ; То же самое для правого шифта (с таймаутом 300 мс)
+    global RShiftStart
+    if (A_PriorKey = "RShift" && (A_TickCount - RShiftStart) < 300) {
         SetLayout(EN)
     }
 }

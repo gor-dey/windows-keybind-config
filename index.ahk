@@ -6,3 +6,4 @@ SetWorkingDir A_ScriptDir
 #Include macos_logic.ahk
 #Include language_switch.ahk
 #Include vertical_mouse.ahk
+#Include unplug_insert.ahk
